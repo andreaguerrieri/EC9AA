@@ -43,6 +43,17 @@ def load_specific_article(conn, link_value, load_link_only = False):
     c.execute(query)
     return c.fetchall()
 
+def save_sentiment(conn, link, sentiment):
+    query =  f'''UPDATE articles SET extra = {str(sentiment)} WHERE link = "{link}"'''
+    c = conn.cursor()
+    c.execute(query)
+    conn.commit()
+    c.close()
+
 if __name__ == '__main__':
-    print(load_all_articles(connect_to_db(),year= 2021, month= 6, day=1 ))
-    #print(load_specific_article(connect_to_db(),"/tvshowbiz/article-9642401/Former-WAG-Phoebe-Burgess-32-does-school-run-fashion-week.html"))
+   # print(load_all_articles(connect_to_db(),year= 2021, month= 6, day=1 ))
+    conn = connect_to_db()
+    print(load_specific_article(conn,"/tvshowbiz/article-9642401/Former-WAG-Phoebe-Burgess-32-does-school-run-fashion-week.html"))
+    save_sentiment(conn,"/tvshowbiz/article-9642401/Former-WAG-Phoebe-Burgess-32-does-school-run-fashion-week.html", '1.0')
+
+    print(load_specific_article(conn,"/tvshowbiz/article-9642401/Former-WAG-Phoebe-Burgess-32-does-school-run-fashion-week.html"))
