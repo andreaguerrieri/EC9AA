@@ -30,7 +30,7 @@ def make_logger():
     logger.setLevel(logging.INFO)
     console_handler = logging.StreamHandler()
     console_handler.setLevel(logging.INFO)
-    console_handler.setFormatter(logging.Formatter('%(levelname)s - %(message)s'))
+    console_handler.setFormatter(logging.Formatter('%(levelname)s - %(message)s - %(threadName)s'))
     file_handler = logging.FileHandler('errors.log', mode='w')
     file_handler.setLevel(logging.ERROR)
     file_handler.setFormatter(logging.Formatter(
